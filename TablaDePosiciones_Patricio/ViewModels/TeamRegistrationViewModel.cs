@@ -6,6 +6,8 @@ namespace TablaDePosiciones_Patricio.ViewModels
     {
         [Display(Name = "Pos")]
         public int Position { get; set; }
+        [Display(Name = "Equipo")]
+        public string Name{ get; set; }
         [Display(Name = "J")]
         public int Played { get; set; }
         [Display(Name = "G")]
@@ -23,4 +25,4 @@ namespace TablaDePosiciones_Patricio.ViewModels
         [Display(Name = "Pts")]
         public int Points { get; set; }
     }
-}
+} 

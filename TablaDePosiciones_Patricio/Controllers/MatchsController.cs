@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using TablaDePosiciones_Patricio.Data;
 using TablaDePosiciones_Patricio.ViewModels;
@@ -30,7 +29,7 @@ namespace TablaDePosiciones_Patricio.Controllers
         //Http Post Match
         [HttpPost]
         public IActionResult CMatchVM(CreateMatchViewModel match)
-        {         
+        {
             var homeTeam = _context.TeamRegistration.First(t => t.TeamId == match.HomeTeamId);
             var guestTeam = _context.TeamRegistration.First(t => t.TeamId == match.GuestTeamId);
 
@@ -60,7 +59,8 @@ namespace TablaDePosiciones_Patricio.Controllers
                 homeTeam.GoalDifference = homeTeam.GoalsFavor - homeTeam.GoalsAgainst;
                 guestTeam.GoalDifference = guestTeam.GoalsFavor - guestTeam.GoalsAgainst;
 
-            } else if (homePoints < guestPoints)
+            }
+            else if (homePoints < guestPoints)
             {
                 //partidos ganados
                 guestTeam.Won += 1;
@@ -103,8 +103,8 @@ namespace TablaDePosiciones_Patricio.Controllers
                 //diferencia de goles
                 homeTeam.GoalDifference = homeTeam.GoalsFavor - homeTeam.GoalsAgainst;
                 guestTeam.GoalDifference = guestTeam.GoalsFavor - guestTeam.GoalsAgainst;
-            }          
- 
+            }
+
             _context.TeamRegistration.Update(homeTeam);
             _context.TeamRegistration.Update(guestTeam);
             _context.SaveChanges();

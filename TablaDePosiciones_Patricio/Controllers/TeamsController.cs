@@ -40,9 +40,7 @@ namespace TablaDePosiciones_Patricio.Controllers
                 _context.SaveChanges();
 
                 var records = new TeamRegistration
-                {
-
-                    Position = 0,
+                {                    
                     Played = 0,
                     Won = 0,
                     Drawn = 0,
@@ -50,14 +48,11 @@ namespace TablaDePosiciones_Patricio.Controllers
                     GoalsFavor = 0,
                     GoalsAgainst = 0,
                     GoalDifference = 0,
-                    Points = 0,
-                    
-                    
+                    Points = 0,   
                 };
 
 
                 records.TeamId = team.Id;
-
 
                 _context.TeamRegistration.Add(records);
              

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -21,10 +22,28 @@ namespace TablaDePosiciones_Patricio.Controllers
         public IActionResult Index()
         {
             //De esta forma incluyo dentro de la clase teamRegistration todo lo que este en la clase Team.
-            IEnumerable<TeamRegistrationViewModel> teamRecords = _context.TeamRegistration.Include(x => x.Team).OrderByDescending(x => x.Points)
-                .ThenByDescending(x => x.GoalDifference).Select(item=> new TeamRegistrationViewModel()).ToList();
-           
-            //meter el for para sumarle uno a posicion usar teamrecord.count y position = i + 1;
+            List<TeamRegistrationViewModel> teamRecords = _context.TeamRegistration.Include(x => x.Team)
+               //ordeno la tabla por puntos y por goles de diferencia
+                .OrderByDescending(x => x.Points).ThenByDescending(x => x.GoalDifference)
+                //"convierto" TeamRegistration en TeamRegistrationViewModel
+                .Select(item => new TeamRegistrationViewModel()
+                {
+                    Name = item.Team.Name,
+                    Played = item.Played,
+                    Won = item.Won,
+                    Drawn = item.Drawn,
+                    Lost = item.Lost,
+                    GoalsFavor = item.GoalsFavor,
+                    GoalsAgainst = item.GoalsAgainst,
+                    GoalDifference = item.GoalDifference,   
+                    Points = item.Points
+
+                }).ToList();
+
+            for (int i = 0; i < teamRecords.Count(); i++)
+            {
+                teamRecords[i].Position = i + 1;                
+            }
 
             return View(teamRecords);
         }   

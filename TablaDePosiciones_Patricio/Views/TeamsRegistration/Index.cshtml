@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TablaDePosiciones_Patricio.Models.TeamRegistration>
+﻿@model IEnumerable<TablaDePosiciones_Patricio.ViewModels.TeamRegistrationViewModel>
 @{
     ViewData["Title"] = "Tabla de Posiciones";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -20,9 +20,7 @@
             <thead>
                 <tr>                   
                     <td>@Html.DisplayNameFor(m => m.Position)</td>
-
-                    <td>@Html.DisplayNameFor(m => m.Team.Name)</td>
-
+                    <td>@Html.DisplayNameFor(m => m.Name)</td>
                     <td>@Html.DisplayNameFor(m => m.Played)</td>
                     <td>@Html.DisplayNameFor(m => m.Won)</td>
                     <td>@Html.DisplayNameFor(m => m.Drawn)</td>
@@ -38,9 +36,7 @@
                 {
                     <tr>
                         <td>@item.Position</td>
-
-                        <td>@item.Team.Name.ToString()</td>
-
+                        <td>@item.Name</td>
                         <td>@item.Played</td>
                         <td>@item.Won</td>
                         <td>@item.Drawn</td>
