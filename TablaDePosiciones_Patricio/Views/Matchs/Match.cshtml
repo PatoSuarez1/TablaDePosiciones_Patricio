@@ -1,0 +1,53 @@
+﻿@model TablaDePosiciones_Patricio.ViewModels.CreateMatchViewModel
+@{
+    ViewData["Title"] = "Partidos Vs";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 mb-3">
+            <h3>Partidos</h3>
+            <p><strong>Simple! Elige dos equipos y colocales a cada uno los puntos que realizaron. Luego agrega el resultado.</strong></p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12 d-flex">
+            <form method="post" asp-action="CMatchVM">
+
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group col-md-5 d-inline-flex">
+                        <select class="border-dark" asp-for="HomeTeamId" asp-items="@(new SelectList(Model.Teams,nameof(Team.Id), nameof(Team.Name)))">
+                            <option>Local</option>
+                        </select>
+                        <span asp-validation-for="HomeTeamId" class="text-danger"></span>
+
+                        <input class="col-3 ml-4 border-dark" type="number" asp-for="HomePoints" />
+                        <label asp-for="HomePoints"></label>
+                        <span asp-validation-for="HomePoints" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group col-md-5 d-inline-flex">
+                        <label asp-for="GuestPoints"></label>
+                        <input class="col-3 mr-4 border-dark" type="number" asp-for="GuestPoints" />
+                        <span asp-validation-for="GuestPoints" class="text-danger"></span>
+
+                        <select  class="border-dark" asp-for="GuestTeamId" asp-items="@(new SelectList(Model.Teams,nameof(Team.Id), nameof(Team.Name)))">
+                            <option>Visitante</option>
+                        </select>
+                        <span asp-validation-for="GuestTeamId" class="text-danger"></span>
+                    </div>
+                
+                <div class="form-group ">
+                    <input type="submit" value="Agregar Resultado" class="btn btn-dark" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    @{ <partial name="_ValidationScriptsPartial" />}
+}

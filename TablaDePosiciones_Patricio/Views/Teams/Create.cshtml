@@ -1,0 +1,60 @@
+﻿@model TablaDePosiciones_Patricio.Models.Team
+@{
+    ViewData["Title"] = "Crear Nuevo Equipo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+
+   <div class="row">
+       <div class="col-sm-12">
+           <h3>Crear nuevo equipo</h3>
+       </div>
+   </div>
+
+<div class="row">
+       <div class="col-sm-10">
+           <form method="post" asp-action="Create">
+               <!--validacion del modelo del lado del servidor-->
+               <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+               <div class="form-group">
+                   <label asp-for="Name" class="control-label"></label>
+                   <input asp-for="Name" class="form-control" />
+                   <!--Validacion del lado del cliente-->
+                   <span asp-validation-for="Name" class="text-danger"></span>
+               </div>
+
+               <div class="form-group">
+                   <label asp-for="Captain" class="control-label"></label>
+                   <input asp-for="Captain" class="form-control" />
+                   <!--Validacion del lado del cliente-->
+                   <span asp-validation-for="Captain" class="text-danger"></span>
+               </div>
+
+               <div class="form-group">
+                   <label asp-for="Foundation" class="control-label"></label>
+                   <input asp-for="Foundation" class="form-control" />
+                   <!--Validacion del lado del cliente-->
+                   <span asp-validation-for="Foundation" class="text-danger"></span>
+               </div>
+
+               <div class="form-group">
+                   <label asp-for="Location" class="control-label"></label>
+                   <input asp-for="Location" class="form-control" />
+                   <!--Validacion del lado del cliente-->
+                   <span asp-validation-for="Location" class="text-danger"></span>
+               </div>
+                
+               <div class="form-group">
+                   <input type="submit" value="Crear Equipo" class="btn btn-dark" />
+               </div>
+           </form>
+       </div>
+    </div>
+</div>
+
+<!--De esta forma podemos usar JavaScript-->
+<!--En este caso lo usamos para que se utilicen las validaciones que realizamos dentro del model Equipo-->
+@section Scripts{
+    @{ <partial name="_ValidationScriptsPartial" />}
+}

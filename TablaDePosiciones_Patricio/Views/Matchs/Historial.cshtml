@@ -1,0 +1,39 @@
+﻿@model  TablaDePosiciones_Patricio.Models.Match
+@{
+    ViewData["Title"] = "Historial";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Historial</h1>
+
+<div class="container">
+
+    <div class="row">
+        @if (Model.ToString().Count() > 0)
+        {
+            <table class="table table-bordered table-striped table-dark">
+                <thead>
+                    <tr>
+                        <td>@Html.DisplayNameFor(m => m.HomeTeamId)</td>
+                        <td>@Html.DisplayNameFor(m => m.HomePoints)</td>
+                        <td><strong>VS</strong></td>
+                        <td>@Html.DisplayNameFor(m => m.GuestPoints)</td>
+                        <td>@Html.DisplayNameFor(m => m.GuestTeamId)</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                   {
+                       <tr>
+                           <td>@Model.HomeTeamId</td>
+                           <td>@Model.HomePoints</td>
+                           <td><strong>VS</strong></td>
+                           <td>@Model.GuestPoints</td>
+                           <td>@Model.GuestTeamId</td>
+                       </tr>
+                   }
+                </tbody>
+            </table>
+        }
+    </div>
+</div>

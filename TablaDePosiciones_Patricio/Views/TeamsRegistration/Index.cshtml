@@ -1,0 +1,58 @@
+﻿@model IEnumerable<TablaDePosiciones_Patricio.Models.TeamRegistration>
+@{
+    ViewData["Title"] = "Tabla de Posiciones";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+
+    <div class="row">
+       <div class="col-sm-6">
+           <h3>Tabla de Posiciones</h3>
+       </div>
+       <div class="col-sm-6">
+           <a class="btn btn-outline-secondary d-block" asp-action="Match" asp-controller="Matchs">Nuevo Partido</a>
+       </div>
+    </div>
+    <div class="row">
+
+        <table class="table table-bordered table-striped table-dark">
+            <thead>
+                <tr>                   
+                    <td>@Html.DisplayNameFor(m => m.Position)</td>
+
+                    <td>@Html.DisplayNameFor(m => m.Team.Name)</td>
+
+                    <td>@Html.DisplayNameFor(m => m.Played)</td>
+                    <td>@Html.DisplayNameFor(m => m.Won)</td>
+                    <td>@Html.DisplayNameFor(m => m.Drawn)</td>
+                    <td>@Html.DisplayNameFor(m => m.Lost)</td>
+                    <td>@Html.DisplayNameFor(m => m.GoalsFavor)</td>
+                    <td>@Html.DisplayNameFor(m => m.GoalsAgainst)</td>
+                    <td>@Html.DisplayNameFor(m => m.GoalDifference)</td>
+                    <td>@Html.DisplayNameFor(m => m.Points)</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Position</td>
+
+                        <td>@item.Team.Name.ToString()</td>
+
+                        <td>@item.Played</td>
+                        <td>@item.Won</td>
+                        <td>@item.Drawn</td>
+                        <td>@item.Lost</td>
+                        <td>@item.GoalsFavor</td>
+                        <td>@item.GoalsAgainst</td>
+                        <td>@item.GoalDifference</td>
+                        <td>@item.Points</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
