@@ -12,7 +12,7 @@ namespace TablaDePosiciones_Patricio.Controllers
 
         public MatchsController(ApplicationDbContext context)
         {
-            _context = context;
+            _context = context;    
         }
 
         //Http Get Match
