@@ -10,10 +10,9 @@ namespace TablaDePosiciones_Patricio.Data
 
         }
 
+        public DbSet<User> User { get; set; }
         public DbSet<Team> Team { get; set; }
         public DbSet<TeamRegistration> TeamRegistration { get; set; }
         public DbSet<Match> Match { get; set; }
-
-
     }
 }

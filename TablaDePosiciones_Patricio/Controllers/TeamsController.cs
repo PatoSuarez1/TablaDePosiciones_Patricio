@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using TablaDePosiciones_Patricio.Data;
 using TablaDePosiciones_Patricio.Models;
@@ -35,6 +36,14 @@ namespace TablaDePosiciones_Patricio.Controllers
 
             if (ModelState.IsValid)
             {
+                bool nameAlreadyExists = _context.Team.Any(t => t.Name == team.Name);
+                
+                if (nameAlreadyExists)
+                {
+                    ModelState.AddModelError("Name", "El nombre de ese equipo ya existe.");
+                    return View();
+                }
+
                 _context.Team.Add(team);
 
                 _context.SaveChanges();
@@ -96,7 +105,7 @@ namespace TablaDePosiciones_Patricio.Controllers
                 _context.Team.Update(team);
                 _context.SaveChanges();
                 //mensaje para avisar al cliente que se ha creado.
-                TempData["mensaje"] = "El team se ha actualizado correctamente";
+                TempData["mensaje"] = "El equipo se ha actualizado correctamente";
                 //redireccion al index
                 return RedirectToAction("Index");
             }
@@ -124,7 +133,7 @@ namespace TablaDePosiciones_Patricio.Controllers
         //Http Post Delete
         [HttpPost]
         [ValidateAntiForgeryToken]//es una proteccion para que no se pueda enviar records masivamente con un bot
-        public IActionResult DeleteEquipo(int? id)
+        public IActionResult DeleteTeam(int? id)
         {
             var team = _context.Team.Find(id);
 
@@ -136,7 +145,7 @@ namespace TablaDePosiciones_Patricio.Controllers
             _context.Team.Remove(team);
             _context.SaveChanges();
             //mensaje para avisar al cliente que se ha creado.
-            TempData["mensaje"] = "El team se ha eliminado correctamente";
+            TempData["mensaje"] = "El equipo se ha eliminado correctamente";
             //redireccion al index
             return RedirectToAction("Index");
         }

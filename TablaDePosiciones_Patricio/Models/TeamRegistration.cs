@@ -24,6 +24,7 @@ namespace TablaDePosiciones_Patricio.Models
         public int Points { get; set; }
         //referencia One2One
         public int TeamId { get; set; }
+        //Team siempre es null, por que?
         public virtual Team Team { get; set; }
     }
 }

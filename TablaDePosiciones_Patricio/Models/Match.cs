@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TablaDePosiciones_Patricio.Models
 {
@@ -11,9 +12,7 @@ namespace TablaDePosiciones_Patricio.Models
         public int? GuestTeamId { get; set; }
         public float HomePoints { get; set; }
         public float GuestPoints { get; set; }
-
-        //Relacion con clase Team
-
+        //Relacion con clase Team // son null
         public Team HomeTeam { get; set; }
         public Team GuestTeam { get; set; }
 
