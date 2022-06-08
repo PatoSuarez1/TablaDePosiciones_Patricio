@@ -4,7 +4,6 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TablaDePosiciones_Patricio.Data;
-using TablaDePosiciones_Patricio.Models;
 using TablaDePosiciones_Patricio.ViewModels;
 
 namespace TablaDePosiciones_Patricio.Controllers

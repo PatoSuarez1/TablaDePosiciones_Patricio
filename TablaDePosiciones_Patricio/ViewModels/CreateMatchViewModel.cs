@@ -17,11 +17,9 @@ namespace TablaDePosiciones_Patricio.ViewModels
         [Display(Name = "Visitante")]
         public int GuestTeamId { get; set; }
 
-        [Range(0, 300, ErrorMessage = "La puntuacion debe ser del 0 en adelante")]
         [Display(Name = "Pts")]
-        public int  HomePoints { get; set; }
+        public int HomePoints { get; set; }
 
-        [Range(0, 300, ErrorMessage = "La puntuacion debe ser del 0 en adelante")]
         [Display(Name = "Pts")]
         public int GuestPoints { get; set; }
     }
