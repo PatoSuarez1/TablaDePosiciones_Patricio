@@ -14,18 +14,19 @@
             </button>
         </div>
     }
-
     <div class="row">
-       <div class="col-sm-6">
-           <h3>Tabla de Posiciones</h3>
-       </div>
-       <div class="col-sm-6">
-           <a class="btn btn-outline-secondary d-block" asp-action="CMatchVM" asp-controller="Matchs">Nuevo Partido</a>
-       </div>
+        <div class="col-sm-6">
+            <h3>Tabla de Posiciones</h3>
+        </div>
+        <div class="col-sm-3">
+            <a class="btn btn-outline-secondary d-block" asp-controller="Matchs" asp-action="CMatchVM">Nuevo Partido</a>
+        </div>
+        <div class="col-sm-3">
+            <a class="btn btn-outline-secondary d-block" asp-controller="Matchs" asp-action="Historial">Historial</a>
+        </div>
     </div>
     <hr />
     <div class="row">
-
         <table class="table table-bordered table-striped table-dark">
             <thead>
                 <tr>                   

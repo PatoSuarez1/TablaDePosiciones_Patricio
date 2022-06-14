@@ -15,20 +15,20 @@ namespace TablaDePosiciones_Patricio.Controllers
         {
             _context = context;
         }
-        //Http Get Index
+        [HttpGet]
         public IActionResult Index()
         {
             IEnumerable<Team> teamList = _context.Team;
             
             return View(teamList);
         }
-        //Http Get Create
+
+        [HttpGet]
         public IActionResult Create()
         {
             return View();
         }
 
-        //Http Post Create
         [HttpPost]
         [ValidateAntiForgeryToken]//es una proteccion para que no se pueda enviar records masivamente con un bot
         public IActionResult Create(Team team)
@@ -48,25 +48,6 @@ namespace TablaDePosiciones_Patricio.Controllers
 
                 _context.SaveChanges();
 
-                var records = new TeamRegistration
-                {                    
-                    Played = 0,
-                    Won = 0,
-                    Drawn = 0,
-                    Lost = 0,
-                    GoalsFavor = 0,
-                    GoalsAgainst = 0,
-                    GoalDifference = 0,
-                    Points = 0,   
-                };
-
-
-                records.TeamId = team.Id;
-
-                _context.TeamRegistration.Add(records);
-             
-                _context.SaveChanges();
-
                 //mensaje para avisar al cliente que se ha creado.
                 TempData["mensaje"] = "El Equipo se ha creado correctamente";
                 //redireccion al index
@@ -77,7 +58,7 @@ namespace TablaDePosiciones_Patricio.Controllers
             return View();
         }
 
-        //Http Get Edit
+        [HttpGet]
         public IActionResult Edit(int? id)
         {
             if (id == null || id == 0)
@@ -94,8 +75,7 @@ namespace TablaDePosiciones_Patricio.Controllers
 
             return View(team);
         }
-
-        //Http Post Edit
+                
         [HttpPost]
         [ValidateAntiForgeryToken]//es una proteccion para que no se pueda enviar records masivamente con un bot
         public IActionResult Edit(Team team)
@@ -112,7 +92,7 @@ namespace TablaDePosiciones_Patricio.Controllers
             return View();
         }
 
-        //Http Get Delete
+        [HttpGet]
         public IActionResult Delete(int? id)
         {
             if (id == null || id == 0)
@@ -130,7 +110,6 @@ namespace TablaDePosiciones_Patricio.Controllers
             return View(team);
         }
 
-        //Http Post Delete
         [HttpPost]
         [ValidateAntiForgeryToken]//es una proteccion para que no se pueda enviar records masivamente con un bot
         public IActionResult DeleteTeam(int? id)
