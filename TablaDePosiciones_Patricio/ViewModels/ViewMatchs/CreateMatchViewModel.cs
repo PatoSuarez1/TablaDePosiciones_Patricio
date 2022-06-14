@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using TablaDePosiciones_Patricio.Models;
 
-namespace TablaDePosiciones_Patricio.ViewModels
+namespace TablaDePosiciones_Patricio.ViewModels.ViewMatchs
 {
     public class CreateMatchViewModel
     {
@@ -18,9 +18,9 @@ namespace TablaDePosiciones_Patricio.ViewModels
         public int GuestTeamId { get; set; }
 
         [Display(Name = "Pts")]
-        public int HomePoints { get; set; }
+        public float HomePoints { get; set; }
 
         [Display(Name = "Pts")]
-        public int GuestPoints { get; set; }
+        public float GuestPoints { get; set; }
     }
 }

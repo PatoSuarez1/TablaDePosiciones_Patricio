@@ -12,7 +12,7 @@ namespace TablaDePosiciones_Patricio.Models
         public int? GuestTeamId { get; set; }
         public float HomePoints { get; set; }
         public float GuestPoints { get; set; }
-        //Relacion con clase Team // son null
+        //Relacion con clase Team
         public Team HomeTeam { get; set; }
         public Team GuestTeam { get; set; }
 

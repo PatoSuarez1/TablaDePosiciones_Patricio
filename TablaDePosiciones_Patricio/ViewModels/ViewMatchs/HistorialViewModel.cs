@@ -1,9 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace TablaDePosiciones_Patricio.ViewModels
+namespace TablaDePosiciones_Patricio.ViewModels.ViewMatchs
 {
     public class HistorialViewModel
     {
+        public int Id { get; set; }
         [Display(Name = "Local")]
         public string HomeTeamName { get; set; }
         [Display(Name = "Visitante")]
