@@ -1,0 +1,44 @@
+﻿@model TablaDePosiciones_Patricio.ViewModels.ViewMatchs.DeleteMatchViewModel
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>¿Deseas eliminar este partido?</h3>
+<hr />
+<div class="row">
+    <div class="col-sm-12 d-flex">
+        <form method="post" asp-action="DeleteMatch">
+         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group col-md-5 d-inline-flex">
+                <select disabled="disabled" class="border-dark" asp-for="HomeTeamId" asp-items="@(new SelectList(Model.Teams,nameof(Team.Id), nameof(Team.Name)))">
+                    <option>Local</option>
+                </select>
+                <span asp-validation-for="HomeTeamId" class="text-danger"></span>
+                <input disabled="disabled" class="col-3 ml-4 border-dark" type="number" asp-for="HomePoints" />
+                <label asp-for="HomePoints"></label>             
+            </div>
+            <div class="form-group col-md-5 d-inline-flex">
+                <label asp-for="GuestPoints"></label>
+                <input disabled="disabled" class="col-3 mr-4 border-dark" type="number" asp-for="GuestPoints" />
+                <select disabled="disabled" class="border-dark" asp-for="GuestTeamId" asp-items="@(new SelectList(Model.Teams,nameof(Team.Id), nameof(Team.Name)))">
+                    <option>Visitante</option>
+                </select>
+                <span asp-validation-for="GuestTeamId" class="text-danger"></span>
+            </div>               
+            <div class="form-group">
+                <input type="submit" value="Eliminar" class="btn btn-dark" />
+            </div>
+        </form>
+    </div>    
+</div>
+<hr/>
+<div>
+    <a class="text-dark" asp-controller="Matchs"  asp-action="Historial"><strong>Volver atras</strong></a>
+</div>
+
+@section Scripts{
+    @{ <partial name="_ValidationScriptsPartial" />}
+}
+
+
