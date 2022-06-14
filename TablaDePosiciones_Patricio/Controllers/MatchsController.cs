@@ -34,7 +34,7 @@ namespace TablaDePosiciones_Patricio.Controllers
         {
             bool hasError = false;
 
-            matchViewModel.Teams = _context.Team.ToList();          
+            matchViewModel.Teams = _context.Team.ToList();
 
             if (matchViewModel.HomeTeamId == matchViewModel.GuestTeamId)
             {
@@ -61,12 +61,81 @@ namespace TablaDePosiciones_Patricio.Controllers
                 GuestPoints = matchViewModel.GuestPoints
             };
 
-            _context.Match.Add(match);        
+            _context.Match.Add(match);
             _context.SaveChanges();
-            
+
             TempData["mensaje"] = "El partido fue añadido exitosamente";
             //primero el action y despues el controller
             return RedirectToAction("Index", "TeamsRegistration");
+        }
+
+        [HttpGet]
+        public IActionResult EditMatch(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            //obetener el Match
+            var match = _context.Match.Find(id);
+            if (match == null)
+            {
+                return NotFound();
+            }
+            //Pasar datos de match a la viewmodel
+            EditMatchViewModel editMatchView = new EditMatchViewModel()
+            {
+                Id = match.Id,
+                HomeTeamId = (int)match.HomeTeamId,
+                HomePoints = match.HomePoints,
+                GuestTeamId = (int)match.GuestTeamId,
+                GuestPoints = match.GuestPoints
+            };
+            editMatchView.Teams = _context.Team.ToList();
+            //cargarle los equipos a la view model
+            return View(editMatchView);
+        }
+
+        [HttpPost]
+        public IActionResult EditMatch(EditMatchViewModel viewModel)
+        {
+            bool hasError = false;
+            viewModel.Teams = _context.Team.ToList();
+
+            if (viewModel.HomeTeamId == viewModel.GuestTeamId)
+            {
+                ViewBag.ErrorMsg = ("Debe seleccionar un equipo. No pueden ser los mismos.");
+                hasError = true;
+            }
+
+            if (viewModel.HomePoints < 0 || viewModel.GuestPoints < 0)
+            {
+                ViewBag.ErrorMsgPoint = ("Los puntuacion no puede ser menor a 0");
+                hasError = true;
+            }
+
+            if (hasError == true)
+            {
+                return View(viewModel);
+            }
+
+            if (ModelState.IsValid)
+            {
+                Match match = new Match()
+                {
+                    Id = viewModel.Id,
+                    HomeTeamId = viewModel.HomeTeamId,
+                    GuestTeamId = viewModel.GuestTeamId,
+                    HomePoints = viewModel.HomePoints,
+                    GuestPoints = viewModel.GuestPoints
+                };
+
+                _context.Match.Update(match);
+                _context.SaveChanges();
+                TempData["mensaje"] = "El partido fue modificado";
+                return RedirectToAction("Index", "TeamsRegistration");
+            }
+            return View();
         }
 
         [HttpGet]
@@ -85,74 +154,51 @@ namespace TablaDePosiciones_Patricio.Controllers
             return View(historial);
         }
 
-        //[HttpGet]
-        //public IActionResult EditMatch(int? id)
-        //{
-        //    if (id == null || id == 0)
-        //    {
-        //        return NotFound();
-        //    }
+        [HttpGet]
+        public IActionResult DeleteMatch(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
 
-        //    //obetener el Match
-        //    var match = _context.Match.Find(id);
-        //    if (match == null)
-        //    {
-        //        return NotFound();
-        //    }
+            var match = _context.Match.Find(id);
 
-        //    return View(match);
-        //}
+            if (match == null)
+            {
+                return NotFound();
+            }
 
-        //[HttpPost]
-        //public IActionResult EditMatch(CreateMatchViewModel match)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        _context.Match.Update(match);
-        //        _context.SaveChanges();
-        //        //mensaje para avisar al cliente que se ha creado.
-        //        TempData["mensaje"] = "El equipo se ha actualizado correctamente";
-        //        //redireccion al index
-        //        return RedirectToAction("Index", "TeamsRegistration");
-        //    }
-        //    return View();
-        //}
+            DeleteMatchViewModel editMatchView = new DeleteMatchViewModel()
+            {
+                Id = match.Id,
+                HomeTeamId = (int)match.HomeTeamId,
+                HomePoints = match.HomePoints,
+                GuestTeamId = (int)match.GuestTeamId,
+                GuestPoints = match.GuestPoints
+            };
+            editMatchView.Teams = _context.Team.ToList();
 
-        //[HttpGet]
-        //public IActionResult DeleteMatch(int? id)
-        //{
-        //    if (id == null || id == 0)
-        //    {
-        //        return NotFound();
-        //    }
+            return View(editMatchView);
+        }
 
-        //    //obetener el team
-        //    var match = _context.Match.Find(id);
-        //    if (match == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return View(match);
-        //}
-
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]//es una proteccion para que no se pueda enviar records masivamente con un bot
-        //public IActionResult Delete(int? id)
-        //{
-        //    var match = _context.Match.Find(id);
-
-        //    if (match == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    _context.Match.Remove(match);
-        //    _context.SaveChanges();
-        //    //mensaje para avisar al cliente que se ha creado.
-        //    TempData["mensaje"] = "El equipo se ha eliminado correctamente";
-        //    //redireccion al index
-        //    return RedirectToAction("Index");
-        //}
+        [HttpPost]
+        public IActionResult DeleteMatch(DeleteMatchViewModel deleteMatch)
+        {
+            Match match = new Match()
+            {
+                Id = deleteMatch.Id,
+                HomeTeamId = deleteMatch.HomeTeamId,
+                GuestTeamId = deleteMatch.GuestTeamId,
+                HomePoints = deleteMatch.HomePoints,
+                GuestPoints = deleteMatch.GuestPoints,
+                
+             
+            };
+            _context.Match.Remove(match);
+            _context.SaveChanges();
+            TempData["mensaje"] = "El partido se ha eliminado correctamente";
+            return RedirectToAction("Index", "TeamsRegistration");
+        }
     }
 }

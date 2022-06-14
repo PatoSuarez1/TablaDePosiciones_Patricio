@@ -19,7 +19,7 @@ namespace TablaDePosiciones_Patricio.Controllers
         public IActionResult Index()
         {
             IEnumerable<Team> teamList = _context.Team;
-            
+
             return View(teamList);
         }
 
@@ -37,7 +37,7 @@ namespace TablaDePosiciones_Patricio.Controllers
             if (ModelState.IsValid)
             {
                 bool nameAlreadyExists = _context.Team.Any(t => t.Name == team.Name);
-                
+
                 if (nameAlreadyExists)
                 {
                     ModelState.AddModelError("Name", "El nombre de ese equipo ya existe.");
@@ -75,7 +75,7 @@ namespace TablaDePosiciones_Patricio.Controllers
 
             return View(team);
         }
-                
+
         [HttpPost]
         [ValidateAntiForgeryToken]//es una proteccion para que no se pueda enviar records masivamente con un bot
         public IActionResult Edit(Team team)
